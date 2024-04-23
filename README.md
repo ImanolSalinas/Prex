@@ -61,10 +61,32 @@ Antes de comenzar, asegúrate de tener Docker instalado en tu sistema. Si no lo 
 
    Para ejecutar los tests automatizados, utiliza:
 
+   php artisan passport:install --env=testing
+   
+
+   
+   Este comando generará las claves necesarias y las almacenará en tu base de datos de testing, según lo especificado en tu archivo `.env.testing`.
+
+    **Crear Token de Acceso Personal**:
+   Después de generar las claves, puedes crear un token de acceso personal para usar en tus pruebas. Este paso es necesario si tus pruebas implican interactuar con la API protegida por Passport.
+
+   Ejecuta el siguiente comando para crear un token de acceso personal:
+
+   
+   php artisan passport:client --personal --name="TestingPersonalAccessClient" --env=testing
+
+   ### Ejecución de Migraciones y Seeders en la Base de Datos de Testing
+
+   Para preparar tu base de datos de testing, ejecuta las migraciones y seeders utilizando el siguiente comando:]
+
+   
+   php artisan migrate:fresh --seed --env=testing
+
+
+   
+   Este comando reiniciará tu base de datos de testing, ejecutará todas las migraciones y aplicará los seeders definidos en tu proyecto, asegurando que tu entorno de pruebas esté correctamente inicializado.
 
    ./vendor/bin/sail artisan test
-
-
 
    
    Asegúrate de que tu archivo `.env.testing` esté configurado correctamente para apuntar a tu base de datos de testing.

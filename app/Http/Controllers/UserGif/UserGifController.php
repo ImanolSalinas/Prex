@@ -31,7 +31,6 @@ class UserGifController extends Controller
             return response()->json($userGif, 201);
         
         } catch (\Exception $e) {
-            // Maneja errores como usuario no encontrado o cualquier otro error
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }

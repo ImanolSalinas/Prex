@@ -31,12 +31,10 @@ class GiphyControllerTest extends TestCase
      /** @test */
     public function it_can_search_gifs()
     {
-        // Realiza la solicitud con el token
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
         ])->json('GET', '/api/get-gifs', ['query' => 'funny cats', 'limit' => '3']);
 
-        // Verifica la estructura de la respuesta
         $response->assertStatus(200)
                  ->assertJsonStructure([
                      '*' => [
@@ -56,18 +54,14 @@ class GiphyControllerTest extends TestCase
     /** @test */
     public function it_can_show_a_single_gif_by_id()
     {
-        // ID de un GIF para realizar la solicitud
         $gifId = 'qjtqEScZudXnnbnbz4';
 
-        // Realiza la solicitud con el token y el ID del GIF
         $response = $this->withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
         ])->json('GET', '/api/get-gif', ['id' => $gifId]);
 
-        // Verifica que la respuesta tiene un código de estado 200
         $response->assertStatus(200);
 
-        // Verifica que la respuesta JSON tiene la estructura esperada
         $response->assertJsonStructure([
             'type',
             'id',

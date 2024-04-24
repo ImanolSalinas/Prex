@@ -102,10 +102,8 @@ class UserGifControllerTest extends TestCase
             'Authorization' => 'Bearer ' . $this->token,
         ])->json('POST', '/api/favourite-gif', ['user_id' => 1, 'gif_id' => $gifId, 'alias' => 'alias_test']);
 
-        // Verifica el código de estado HTTP 400 para la solicitud fallida
         $response->assertStatus(422);
 
-        // Verifica la estructura de la respuesta de error
         $response->assertJsonStructure([
             'message',
             'errors' => [
@@ -113,7 +111,6 @@ class UserGifControllerTest extends TestCase
             ],
         ]);
 
-        // Verifica el mensaje de error específico
         $response->assertJson([
             'message' => 'The gif id already exists for this user.',
             'errors' => [

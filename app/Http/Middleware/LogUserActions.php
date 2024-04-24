@@ -26,10 +26,9 @@ class LogUserActions
         $responseBody = $response->getContent();
 
         if ($this->isHtmlResponse($responseBody)) {
-            // Maneja el cuerpo de la respuesta HTML de manera adecuada
+            
             $responseBody = json_encode(['html' => 'Redirection or HTML response']);
         } else {
-            // Asegúrate de que el cuerpo de la respuesta sea un JSON válido
             $responseBody = json_encode(['content' => $responseBody]);
         }
 
@@ -38,12 +37,10 @@ class LogUserActions
         $log->service = $service;
         $log->request_body = json_encode($request->all());
         $log->http_code = $statusCode;
-        $log->response_body = $responseBody; // Ahora siempre es un JSON válido
+        $log->response_body = $responseBody;
         $log->ip_origin = $request->ip();
 
         $log->save();
-       
-    
         return $response;
     }
     
